@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Pangkat</title>
+    <style>
+        body {
+            background-color: #f0f4ff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #4a90e2;
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input {
+            padding: 10px;
+            width: calc(100% - 22px);
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px;
+            width: 100%;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            font-size: 18px;
+            color: #333;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 12px;
+            color: #888;
+        }
+
+        .reset-button {
+            background-color: #f44336;
+        }
+
+        .reset-button:hover {
+            background-color: #e53935;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Web Pangkat Keren</h1>
+        <form id="baseForm">
+            <label for="base">Masukkan Angka:</label>
+            <input type="number" id="base" placeholder="Masukkan angka..." required>
+            <button type="button" id="baseBtn">OK</button>
+        </form>
+
+        <form id="expForm" style="display: none;">
+            <label for="exponent">Masukkan Pangkat:</label>
+            <input type="number" id="exponent" placeholder="Masukkan pangkat..." required>
+            <button type="button" id="expBtn">OK</button>
+        </form>
+
+        <h2 id="result" style="display: none;">Hasil: <span id="output"></span></h2>
+        <button id="resetBtn" class="reset-button" style="display: none;">Ulang</button>
+    </div>
+    <footer>Copyright ByRafa</footer>
+
+    <script>
+        // Initial form for base input
+        document.getElementById('baseBtn').addEventListener('click', function() {
+            const base = document.getElementById('base').value;
+            if (base) {
+                // Hide base form, show exponent form
+                document.getElementById('baseForm').style.display = 'none';
+                document.getElementById('expForm').style.display = 'block';
+            } else {
+                alert("Masukkan angka yang benar");
+            }
+        });
+
+        // Exponent form handling
+        document.getElementById('expBtn').addEventListener('click', function() {
+            const base = document.getElementById('base').value;
+            const exponent = document.getElementById('exponent').value;
+
+            if (exponent) {
+                // Calculate the result
+                const result = Math.pow(base, exponent);
+
+                // Check if result exceeds limit
+                if (result > 1000000) {
+                    document.getElementById('output').textContent = "Tak Bisa Dihitung"; // Change to "Tak Bisa Dihitung"
+                } else {
+                    document.getElementById('output').textContent = result;
+                }
+
+                document.getElementById('result').style.display = 'block';
+
+                // Show reset button
+                document.getElementById('resetBtn').style.display = 'block';
+
+                // Reset forms
+                document.getElementById('expForm').style.display = 'none';
+            } else {
+                alert("Masukkan pangkat yang benar");
+            }
+        });
+
+        // Reset button functionality
+        document.getElementById('resetBtn').addEventListener('click', function() {
+            location.reload(); // Refresh the webpage
+        });
+    </script>
+</body>
+</html>
